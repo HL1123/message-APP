@@ -2,6 +2,7 @@ package com.example.myapplication2;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -16,8 +17,6 @@ public class SendActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sendactivity);
-        editText1=(EditText) findViewById(R.id.edit1);
-        editText2=(EditText) findViewById(R.id.edit2);
         Button button=(Button) findViewById(R.id.send);
 //        Intent intent=getIntent();
 //        String name= intent.getStringExtra("e_name");
@@ -28,12 +27,15 @@ public class SendActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                editText1=(EditText) findViewById(R.id.edit1);
+                editText2=(EditText) findViewById(R.id.edit2);
                 String name=editText1.getText().toString();
                 String message=editText2.getText().toString();
-                Intent intent=new Intent(SendActivity.this,MainActivity.class);
+                Intent intent=new Intent();
                 intent.putExtra("e_name",name);
                 intent.putExtra("e_message",message);
-                startActivity(intent);
+                setResult(Activity.RESULT_OK,intent);
+                finish();
             }
         });
     }
